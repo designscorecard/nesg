@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <title>{% block title %}Educa{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" >
+</head>
+
+<body>
+  <div class="main_wrapper">
+    <div id="header">
+      <div class="wrapper navbar">
+        <a href="/"> <img class="logo" src="{% static 'img/nesg_logo.svg' %}" alt="NESG Logo"> </a>
+        <ul class="menu">
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url "logout" %}">Sign out</a></li>
+          {% else %}
+            <li><a href="{% url "login" %}">Sign in</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+
+    <div id="content" class="wrapper content-inside">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="wrapper footer_logo">
+      <a href="https://nesgroup.org" target="_blank"><img class="logo" src="{% static 'img/nesg_logo.svg' %}" alt="NESG Logo"></a>
+      <p>© 2020 NESG, Lagos Nig.</p>
+    </div>
+    <div class="footer_media">
+      <a href="#" target="_blank"> <img src="" alt=""></a>
+    </div>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      {% block domready %}
+      {% endblock %}
+    });
+  </script>
+
+</body>
+</html>
